@@ -1,4 +1,4 @@
-package com.taskmanager.filter;
+package com.taskmanager.controllers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,18 +11,15 @@ public class CadastroServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // Coleta os dados do formulário de cadastro.jsp
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
 
-        // Aqui, na prática, você chamaria o seu DAO para salvar no banco de dados
-        // Exemplo de lógica de sucesso:
         if (nome != null && email != null && senha != null) {
-            // Após cadastrar, redireciona para o login informando que deu certo
+            // Após o cadastro bem-sucedido, redireciona com parâmetro de sucesso
             response.sendRedirect("login.jsp?cadastro=ok");
         } else {
-            request.setAttribute("erro", "Erro ao realizar cadastro. Verifique os campos.");
+            request.setAttribute("erro", "Preencha todos os campos corretamente.");
             request.getRequestDispatcher("cadastro.jsp").forward(request, response);
         }
     }

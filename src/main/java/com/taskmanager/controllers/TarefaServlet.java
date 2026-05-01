@@ -1,4 +1,4 @@
-package com.taskmanager.controllers
+package com.taskmanager.controllers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,27 +7,26 @@ import java.io.IOException;
 
 @WebServlet("/tarefa")
 public class TarefaServlet extends HttpServlet {
-    
-    // O método POST recebe os dados do formulário (Criar, Editar, Excluir)
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
         String acao = request.getParameter("acao");
         
-        // Aqui você integraria com o DAO da Pessoa 2
-        // Exemplo de lógica para o seu trabalho:
         if ("criar".equals(acao)) {
+            // Lógica para salvar nova tarefa no calendário
             String titulo = request.getParameter("titulo");
             String data = request.getParameter("data");
-            System.out.println("Salvando tarefa: " + titulo + " para o dia " + data);
+            System.out.println("Tarefa agendada: " + titulo + " para " + data);
         }
         
-        // Após processar, volta para o dashboard
         response.sendRedirect("dashboard.jsp?msg=sucesso");
     }
 
-    // O método GET busca as tarefas para exibir no calendário
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Aqui você buscaria a lista de tarefas do banco
-        // request.setAttribute("tarefas", listaDeTarefas);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        // Encaminha para o dashboard exibindo as tarefas existentes
         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
     }
 }

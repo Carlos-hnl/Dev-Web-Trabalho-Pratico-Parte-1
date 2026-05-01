@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebFilter("/*")
 public class AuthFilter implements Filter {
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
             throws IOException, ServletException {
         
@@ -16,8 +17,9 @@ public class AuthFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
 
-        // Caminhos que NÃO precisam de login
         String path = req.getRequestURI();
+        
+        // Permite acesso livre ao Login, Cadastro e arquivos de estilo (CSS/JS)
         boolean isLogin = path.endsWith("login.jsp") || path.endsWith("login");
         boolean isCadastro = path.endsWith("cadastro.jsp") || path.endsWith("cadastro");
         boolean isStatic = path.contains("/css/") || path.contains("/js/");
