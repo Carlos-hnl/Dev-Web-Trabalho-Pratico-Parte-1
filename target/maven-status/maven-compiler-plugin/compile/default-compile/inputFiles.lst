@@ -1,0 +1,10 @@
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/controllers/CadastroServlet.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/controllers/LoginServlet.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/controllers/LogoutServlet.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/controllers/TarefaServlet.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/dao/ConexaoPool.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/dao/TarefaDAO.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/dao/UsuarioDAO.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/filter/AuthFilter.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/model/Tarefa.java
+/workspaces/Dev-Web-Trabalho-Pratico-Parte-1/src/main/java/com/taskmanager/model/Usuario.java
