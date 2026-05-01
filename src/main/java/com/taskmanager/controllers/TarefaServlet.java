@@ -1,4 +1,4 @@
-package com.taskmanager.controllers;
+package com.taskmanager.controller;
 
 import com.taskmanager.dao.TarefaDAO;
 import com.taskmanager.model.Tarefa;
@@ -98,4 +98,65 @@ public class TarefaServlet extends HttpServlet {
                         return;
                     }
 
-... (63 linhas)
+                    Tarefa tarefa = new Tarefa();
+                    tarefa.setId(id);
+                    tarefa.setUsuarioId(usuario.getId());
+                    tarefa.setTitulo(titulo);
+                    tarefa.setDescricao(descricao);
+
+                    tarefaDAO.atualizar(tarefa);
+                    redirectComMensagem(req, resp, "Tarefa atualizada!", null);
+                }
+
+                case "concluir" -> {
+                    int id = Integer.parseInt(req.getParameter("id"));
+                    tarefaDAO.alternarConclusao(id, usuario.getId());
+                    resp.sendRedirect(req.getContextPath() + "/dashboard");
+                }
+
+                case "excluir" -> {
+                    int id = Integer.parseInt(req.getParameter("id"));
+                    tarefaDAO.excluir(id, usuario.getId());
+                    redirectComMensagem(req, resp, "Tarefa excluída.", null);
+                }
+
+                default -> resp.sendRedirect(req.getContextPath() + "/dashboard");
+            }
+
+        } catch (SQLException | NumberFormatException e) {
+            getServletContext().log("Erro na operação de tarefa", e);
+            redirectComMensagem(req, resp, null, "Erro interno. Tente novamente.");
+        }
+    }
+
+    // ── Utilitários ────────────────────────────────────────────
+
+    private Usuario getUsuarioSessao(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
+        HttpSession session = req.getSession(false);
+        if (session == null || session.getAttribute("usuarioLogado") == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return null;
+        }
+        return (Usuario) session.getAttribute("usuarioLogado");
+    }
+
+    private void redirectComMensagem(HttpServletRequest req, HttpServletResponse resp,
+                                     String sucesso, String erro) throws IOException {
+        StringBuilder url = new StringBuilder(req.getContextPath() + "/dashboard");
+        if (sucesso != null) {
+            url.append("?msg=").append(encode(sucesso));
+        } else if (erro != null) {
+            url.append("?erro=").append(encode(erro));
+        }
+        resp.sendRedirect(url.toString());
+    }
+
+    private String encode(String value) {
+        try {
+            return java.net.URLEncoder.encode(value, "UTF-8");
+        } catch (Exception e) {
+            return value;
+        }
+    }
+}
