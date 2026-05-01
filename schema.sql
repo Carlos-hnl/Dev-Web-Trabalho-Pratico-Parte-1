@@ -1,9 +1,4 @@
--- =============================================================
---  TaskManager — Script de Banco de Dados (PostgreSQL)
---  Execute este script antes de iniciar a aplicação.
--- =============================================================
-
--- Cria o banco (rode separadamente se necessário)
+-- Criando o banco
 -- CREATE DATABASE taskmanager;
 
 -- Tabela de Usuários
