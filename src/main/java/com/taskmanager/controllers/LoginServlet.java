@@ -1,4 +1,4 @@
-package com.taskmanager.controllers;
+package com.taskmanager.controller;
 
 import com.taskmanager.dao.UsuarioDAO;
 import com.taskmanager.model.Usuario;
@@ -98,4 +98,14 @@ public class LoginServlet extends HttpServlet {
                 cookieEmail.setMaxAge(0);
                 cookieEmail.setPath(req.getContextPath() + "/");
                 resp.addCookie(cookieEmail);
-... (12 linhas)
+            }
+
+            resp.sendRedirect(req.getContextPath() + "/dashboard");
+
+        } catch (SQLException e) {
+            getServletContext().log("Erro no login", e);
+            req.setAttribute("erro", "Erro interno. Tente novamente.");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
+    }
+}
