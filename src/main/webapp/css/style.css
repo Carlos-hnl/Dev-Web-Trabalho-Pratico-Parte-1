@@ -1,1 +1,103 @@
 
+/* css/style.css */
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+}
+
+.container {
+    width: 340px;
+    margin: auto;
+    margin-top: 80px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input, button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #218838;
+}
+
+/* [ADICIONADO] Estilos para mensagens de feedback do servidor */
+.msg-erro {
+    background: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.msg-sucesso {
+    background: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+.msg-info {
+    background: #cff4fc;
+    color: #055160;
+    border: 1px solid #b6effb;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+}
+
+/* [ADICIONADO] Estilo de tarefa concluída */
+.tarefa-concluida {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Lista de tarefas */
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+ul li button {
+    width: auto;
+    padding: 4px 10px;
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+a {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+    color: #28a745;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
