@@ -1,53 +1,68 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskManager — Login</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<div class="container">
-    <h2>Login</h2>
+<body class="auth-body">
 
-    <%-- [CORRIGIDO] Exibe mensagem de sucesso após cadastro --%>
-    <% if ("ok".equals(request.getParameter("cadastro"))) { %>
-        <p class="msg-sucesso">Conta criada com sucesso! Faça login.</p>
-    <% } %>
+<div class="auth-wrapper">
 
-    <%-- [CORRIGIDO] Exibe mensagem após logout --%>
-    <% if ("ok".equals(request.getParameter("logout"))) { %>
-        <p class="msg-info">Você saiu da sua conta.</p>
-    <% } %>
+    <div class="auth-logo">
+        <div class="mark">T</div>
+        <h1>TaskManager</h1>
+        <p>Organize suas tarefas com simplicidade</p>
+    </div>
 
-    <%-- [CORRIGIDO] Exibe erros enviados pelo LoginServlet --%>
-    <% if (request.getAttribute("erro") != null) { %>
-        <p class="msg-erro"><%= request.getAttribute("erro") %></p>
-    <% } %>
+    <div class="auth-card">
+        <h2 class="auth-card-title">Entrar na conta</h2>
 
-    <form action="login" method="post" onsubmit="return validarLogin()">
+        <% if ("ok".equals(request.getParameter("cadastro"))) { %>
+            <div class="alert alert-success">Conta criada com sucesso. Faça login.</div>
+        <% } %>
+        <% if ("ok".equals(request.getParameter("logout"))) { %>
+            <div class="alert alert-info">Você saiu da sua conta.</div>
+        <% } %>
+        <% if (request.getAttribute("erro") != null) { %>
+            <div class="alert alert-error"><%= request.getAttribute("erro") %></div>
+        <% } %>
 
-        <%-- [CORRIGIDO] Pré-preenche e-mail salvo no cookie "lembrarEmail" --%>
-        <input type="email"
-               name="email"
-               id="email"
-               placeholder="Email"
-               value="<%= request.getAttribute("emailSalvo") != null ? request.getAttribute("emailSalvo") : "" %>"
-               required>
+        <form action="login" method="post" onsubmit="return validarLogin()">
 
-        <input type="password" name="senha" id="senha" placeholder="Senha" required>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" placeholder="seu@email.com"
+                       value="<%= request.getAttribute("emailSalvo") != null ? request.getAttribute("emailSalvo") : "" %>"
+                       autocomplete="email" required>
+            </div>
 
-        <label>
-            <input type="checkbox" name="lembrar"> Lembrar login
-        </label>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <div class="input-wrap">
+                    <input type="password" name="senha" id="senha"
+                           placeholder="••••••••" autocomplete="current-password" required>
+                    <button type="button" class="btn-eye" onclick="toggleSenha('senha', this)">👁</button>
+                </div>
+            </div>
 
-        <button type="submit">Entrar</button>
-    </form>
+            <label class="form-check">
+                <input type="checkbox" name="lembrar">
+                <span>Lembrar meu e-mail</span>
+            </label>
 
-    <%-- [CORRIGIDO] Era "cadastro.jsp" — agora aponta para o servlet /cadastro --%>
-    <a href="cadastro">Criar conta</a>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+
+        <div class="auth-card-footer">
+            Não tem conta? <a href="cadastro">Criar conta</a>
+        </div>
+    </div>
+
 </div>
+
 <script src="js/script.js"></script>
 </body>
 </html>
